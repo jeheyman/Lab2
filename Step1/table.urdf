@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<robot name="table">
+
+<material name="brown">
+    <color rgba="0.54 0.27 0.07 1.0"/>
+</material>
+<material name="light_grey">
+    <color rgba="0.8 0.8 0.8 1.0"/>
+</material>
+
+<!-- create link fixed to the "world" -->
+<link name="world" />
+
+<!-- table top link -->
+<link name="table_top">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.025" />
+      <geometry>
+        <box size="2.0 1.0 0.05" />
+      </geometry>
+      <material name="brown" />
+    </visual>
+
+<!-- leg 1 link-->
+<link name="leg1">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.95" />
+      <geometry>
+        <cylinder radius="0.05" length="0.95" />
+      </geometry>
+      <material name="light_grey" />
+    </visual>
+
+<!-- leg 2 link-->
+<link name="leg2">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.95" />
+      <geometry>
+        <cylinder radius="0.05" length="0.95" />
+      </geometry>
+      <material name="light_grey" />
+    </visual>
+
+<!-- leg 3 link-->
+<link name="leg3">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.95" />
+      <geometry>
+        <cylinder radius="0.05" length="0.95" />
+      </geometry>
+      <material name="light_grey" />
+    </visual>
+
+<!-- leg 4 link-->
+<link name="leg4">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.95" />
+      <geometry>
+        <cylinder radius="0.05" length="0.95" />
+      </geometry>
+      <material name="light_grey" />
+    </visual>
+
+<!-- Joints -->
+<!-- fixed joint from world to table top -->
+<joint name="world_to_table" type="fixed">
+    <parent link="world"/>
+    <child link="table_top"/>
+    <origin xyz="0 0 1.0" rpy="0 0 0"/>
+</joint>
+
+<!-- fixed joint from table top to leg 1 -->
+<joint name="table_to_leg1" type="fixed">
+    <parent link="table_top"/>
+    <child link="leg1"/>
+    <origin xyz="0.95 0.45 -0.5" rpy="0 0 0"/>
+</joint>    
+
+<!-- fixed joint from table top to leg 2 -->
+<joint name="table_to_leg2" type="fixed">
+    <parent link="table_top"/>
+    <child link="leg2"/>
+    <origin xyz="-0.95 0.45 -0.5" rpy="0 0 0"/>
+</joint>    
+
+<!-- fixed joint from table top to leg 3 -->
+<joint name="table_to_leg3" type="fixed">
+    <parent link="table_top"/>
+    <child link="leg3"/>
+    <origin xyz="0.95 -0.45 -0.5" rpy="0 0 0"/>
+</joint>    
+
+<!-- fixed joint from table top to leg 4 -->
+<joint name="table_to_leg4" type="fixed">
+    <parent link="table_top"/>
+    <child link="leg4"/>
+    <origin xyz="-0.95 -0.45 -0.5" rpy="0 0 0"/>
+</joint>    
