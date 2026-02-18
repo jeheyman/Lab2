@@ -9,7 +9,8 @@
       leg_length
       leg_radius
       prefix
-      parent">
+      parent
+      *origin">
 
     <!-- Materials -->
     <material name="brown">
@@ -20,8 +21,6 @@
       <color rgba="0.8 0.8 0.8 1.0"/>
     </material>
 
-    <!-- World -->
-    <link name="world"/>
 
     <!-- ================= TABLE TOP ================= -->
     <!-- Frame at TOP surface -->
@@ -37,10 +36,11 @@
 
     <!-- World to table -->
     <joint name="${parent}_to_${prefix}" type="fixed">
-      <parent link="world"/>
-      <child link="table_top"/>
-      <origin xyz="0 0 ${table_height}" rpy="0 0 0"/>
+      <parent link="${parent}"/>
+      <child link="${prefix}_top"/>
+      <xacro:insert_block name="origin"/>
     </joint>
+
 
     <!-- Compute leg offsets -->
     <xacro:property name="leg_x" value="${table_length/2 - leg_radius}"/>

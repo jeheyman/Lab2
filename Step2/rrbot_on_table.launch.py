@@ -10,19 +10,10 @@ def generate_launch_description():
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
-            "rrbot_on_table.urdf.xacro",
+            "/home/jheyman/ece569-spring2026/Lab2/Step2/rrbot_on_table.urdf.xacro",
         ]
     )
     robot_description = {"robot_description": robot_description_content}
-
-    table_description_content = Command(
-        [
-            PathJoinSubstitution([FindExecutable(name="xacro")]),
-            " ",
-            "table.urdf.xacro",
-        ]
-    )
-    table_description = {"table_description": table_description_content}
 
     joint_state_publisher_node = Node(
         package="joint_state_publisher_gui",
@@ -32,7 +23,7 @@ def generate_launch_description():
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="both",
-        parameters=[robot_description , table_description],
+        parameters=[robot_description],
     )
     rviz_node = Node(
         package="rviz2",
