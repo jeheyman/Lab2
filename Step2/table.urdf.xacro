@@ -2,7 +2,7 @@
 <robot name="table" xmlns:xacro="http://wiki.ros.org/xacro">
 
   <xacro:include filename="materials.xacro"/>
-  <xacro:include filename="table_macro.urdf.xacro"/>
+  <xacro:include filename="table_macro.xacro"/>
 
   <link name="world"/>
 

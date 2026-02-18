@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:macro name="table" params="prefix parent *origin">
 
     <!-- ================= PROPERTIES ================= -->
@@ -8,6 +9,13 @@
     <xacro:property name="table_thickness" value="0.05"/>
     <xacro:property name="leg_length" value="${table_height - table_thickness}"/>
     <xacro:property name="leg_radius" value="0.05"/>
+
+    <!-- World to table -->
+    <joint name="${prefix}_to_${parent}" type="fixed">
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent}"/>
+      <child link="${prefix}_top"/>
+    </joint>
 
     <!-- ================= TABLE TOP ================= -->
     <!-- Frame at TOP surface -->
@@ -21,22 +29,14 @@
       </visual>
     </link>
 
-    <!-- World to table -->
-    <joint name="${parent}_to_${prefix}" type="fixed">
-      <parent link="${parent}"/>
-      <child link="${prefix}_top"/>
-      <xacro:insert_block name="origin"/>
-    </joint>
-
-
     <!-- Compute leg offsets -->
     <xacro:property name="leg_x" value="${table_length/2 - leg_radius}"/>
     <xacro:property name="leg_y" value="${table_width/2 - leg_radius}"/>
 
     <!-- ================= LEGS ================= -->
-    <xacro:macro name="leg" params="prefix parent x y">
+    <xacro:macro name="leg" params="name x y">
 
-      <link name="${prefix}">
+      <link name="${name}">
         <visual>
           <!-- Frame at TOP of leg -->
           <origin xyz="0 0 ${-leg_length/2}" rpy="0 0 0"/>
@@ -47,18 +47,19 @@
         </visual>
       </link>
 
-      <joint name="table_to_${prefix}" type="fixed">
-        <parent link="${parent}"/>
-        <child link="${prefix}"/>
+      <joint name="table_to_${name}" type="fixed">
         <origin xyz="${x} ${y} ${-table_thickness}" rpy="0 0 0"/>
+        <parent link="table_top"/>
+        <child link="${name}"/>
       </joint>
 
     </xacro:macro>
 
     <!-- Instantiate four legs -->
-    <xacro:leg prefix="leg_fl" parent="table" x="${leg_x}"  y="${leg_y}"/>
-    <xacro:leg prefix="leg_fr" parent="table" x="${leg_x}"  y="${-leg_y}"/>
-    <xacro:leg prefix="leg_bl" parent="table" x="${-leg_x}" y="${leg_y}"/>
-    <xacro:leg prefix="leg_br" parent="table" x="${-leg_x}" y="${-leg_y}"/>
+    <xacro:leg name="leg_fl" x="${leg_x}"  y="${leg_y}"/>
+    <xacro:leg name="leg_fr" x="${leg_x}"  y="${-leg_y}"/>
+    <xacro:leg name="leg_bl" x="${-leg_x}" y="${leg_y}"/>
+    <xacro:leg name="leg_br" x="${-leg_x}" y="${-leg_y}"/>
 
   </xacro:macro>
+</robot>
