@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="table" params="
+      table_length
+      table_width
+      table_height
+      table_thickness
+      leg_length
+      leg_radius">
+
+    <!-- Materials -->
+    <material name="brown">
+      <color rgba="0.54 0.27 0.07 1.0"/>
+    </material>
+
+    <material name="light_grey">
+      <color rgba="0.8 0.8 0.8 1.0"/>
+    </material>
+
+    <!-- World -->
+    <link name="world"/>
+
+    <!-- ================= TABLE TOP ================= -->
+    <!-- Frame at TOP surface -->
+    <link name="table_top">
+      <visual>
+        <origin xyz="0 0 ${-table_thickness/2}" rpy="0 0 0"/>
+        <geometry>
+          <box size="${table_length} ${table_width} ${table_thickness}"/>
+        </geometry>
+        <material name="brown"/>
+      </visual>
+    </link>
+
+    <!-- World to table -->
+    <joint name="world_to_table" type="fixed">
+      <parent link="world"/>
+      <child link="table_top"/>
+      <origin xyz="0 0 ${table_height}" rpy="0 0 0"/>
+    </joint>
+
+    <!-- Compute leg offsets -->
+    <xacro:property name="leg_x" value="${table_length/2 - leg_radius}"/>
+    <xacro:property name="leg_y" value="${table_width/2 - leg_radius}"/>
+
+    <!-- ================= LEGS ================= -->
+    <xacro:macro name="leg" params="name x y">
+
+      <link name="${name}">
+        <visual>
+          <!-- Frame at TOP of leg -->
+          <origin xyz="0 0 ${-leg_length/2}" rpy="0 0 0"/>
+          <geometry>
+            <cylinder radius="${leg_radius}" length="${leg_length}"/>
+          </geometry>
+          <material name="light_grey"/>
+        </visual>
+      </link>
+
+      <joint name="table_to_${name}" type="fixed">
+        <parent link="table_top"/>
+        <child link="${name}"/>
+        <origin xyz="${x} ${y} 0" rpy="0 0 0"/>
+      </joint>
+
+    </xacro:macro>
+
+    <!-- Instantiate four legs -->
+    <xacro:leg name="leg_fl" x="${leg_x}"  y="${leg_y}"/>
+    <xacro:leg name="leg_fr" x="${leg_x}"  y="${-leg_y}"/>
+    <xacro:leg name="leg_bl" x="${-leg_x}" y="${leg_y}"/>
+    <xacro:leg name="leg_br" x="${-leg_x}" y="${-leg_y}"/>
+
+  </xacro:macro>
+
+</robot>

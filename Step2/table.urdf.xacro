@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<robot name="table" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="table_macro.xacro"/>
+
+  <!-- ================= PROPERTIES ================= -->
+  <xacro:property name="table_length" value="2"/>
+  <xacro:property name="table_width" value="1"/>
+  <xacro:property name="table_height" value="1"/>
+  <xacro:property name="table_thickness" value="0.05"/>
+  <xacro:property name="leg_length" value="${table_height - table_thickness}"/>
+  <xacro:property name="leg_radius" value="0.05"/>
+
+  <!-- Instantiate table -->
+  <xacro:table
+      table_length="${table_length}"
+      table_width="${table_width}"
+      table_height="${table_height}"
+      table_thickness="${table_thickness}"
+      leg_length="${leg_length}"
+      leg_radius="${leg_radius}"/>
+
+</robot>
