@@ -10,6 +10,8 @@
   <xacro:property name="table_thickness" value="0.05"/>
   <xacro:property name="leg_length" value="${table_height - table_thickness}"/>
   <xacro:property name="leg_radius" value="0.05"/>
+  <xacro:property name="prefix" value="table"/>
+  <xacro:property name="parent" value="world" />
 
   <!-- Instantiate table -->
   <xacro:table
@@ -18,6 +20,9 @@
       table_height="${table_height}"
       table_thickness="${table_thickness}"
       leg_length="${leg_length}"
-      leg_radius="${leg_radius}"/>
+      leg_radius="${leg_radius}"
+      prefix = "${prefix}"
+      parent = "${parent}" />
+      
 
 </robot>
