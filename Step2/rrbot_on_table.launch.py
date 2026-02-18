@@ -1,29 +1,51 @@
 from launch import LaunchDescription
+from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
 from launch_ros.actions import Node
-from launch.substitutions import Command
+
 
 def generate_launch_description():
     
-    return LaunchDescription([
-         Node(
-            package='robot_state_publisher',
-            executable='robot_state_publisher',
-            name='robot_state_publisher',
-            output='screen',
-            parameters=[{'robot_description': Command(['xacro ', 'table.urdf'])}]
-        ),
-        Node(
-            package='robot_state_publisher',
-            executable='robot_state_publisher',
-            name='robot_state_publisher',
-            output='screen',
-            parameters=[{'robot_description': Command(['xacro ', 'rrbot_on_table.urdf'])}]
-        ),
-        Node(
-            package='rviz2',
-            executable='rviz2',
-            name='rviz2',
-            output='screen',
-            arguments=['-d', 'rrbot.rviz']
-        )
-    ])
+    # Get URDF via xacro
+    robot_description_content = Command(
+        [
+            PathJoinSubstitution([FindExecutable(name="xacro")]),
+            " ",
+            "rrbot_on_table.urdf.xacro",
+        ]
+    )
+    robot_description = {"robot_description": robot_description_content}
+
+    table_description_content = Command(
+        [
+            PathJoinSubstitution([FindExecutable(name="xacro")]),
+            " ",
+            "table.urdf.xacro",
+        ]
+    )
+    table_description = {"table_description": table_description_content}
+
+    joint_state_publisher_node = Node(
+        package="joint_state_publisher_gui",
+        executable="joint_state_publisher_gui",
+    )
+    robot_state_publisher_node = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        output="both",
+        parameters=[robot_description , table_description],
+    )
+    rviz_node = Node(
+        package="rviz2",
+        executable="rviz2",
+        name="rviz2",
+        output="both",
+        arguments=["-d", "rrbot.rviz"],
+    )
+
+    return LaunchDescription(
+        [
+            joint_state_publisher_node,
+            robot_state_publisher_node,
+            rviz_node,
+        ]
+    )
