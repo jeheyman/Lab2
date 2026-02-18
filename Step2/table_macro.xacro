@@ -1,6 +1,4 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-
   <xacro:macro name="table" params="prefix parent *origin">
 
     <!-- ================= PROPERTIES ================= -->
@@ -38,7 +36,7 @@
     <!-- ================= LEGS ================= -->
     <xacro:macro name="leg" params="prefix parent x y">
 
-      <link name="${name}">
+      <link name="${prefix}">
         <visual>
           <!-- Frame at TOP of leg -->
           <origin xyz="0 0 ${-leg_length/2}" rpy="0 0 0"/>
@@ -49,7 +47,7 @@
         </visual>
       </link>
 
-      <joint name="table_to_${name}" type="fixed">
+      <joint name="table_to_${prefix}" type="fixed">
         <parent link="${parent}"/>
         <child link="${prefix}"/>
         <origin xyz="${x} ${y} ${-table_thickness}" rpy="0 0 0"/>
@@ -64,5 +62,3 @@
     <xacro:leg prefix="leg_br" parent="table" x="${-leg_x}" y="${-leg_y}"/>
 
   </xacro:macro>
-
-</robot>
