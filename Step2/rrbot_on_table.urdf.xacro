@@ -7,14 +7,7 @@
 
     <link name="world" />
 
-    <xacro:table prefix="table" parent="world"
-        table_length="2"
-        table_width="1"
-        table_height="1"
-        table_thickness="0.05"
-        leg_length="0.95"
-        leg_radius="0.05">
-
+    <xacro:table prefix="table" parent="world">
         <origin xyz="0 0 1" rpy="0 0 0" />
     </xacro:table>
 
