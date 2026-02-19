@@ -10,7 +10,7 @@ def generate_launch_description():
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
-            "rrobot_lab.urdf.xacro",
+            "robot_lab.urdf.xacro",
         ]
     )
     robot_description = {"robot_description": robot_description_content}
