@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="table" params="prefix parent *origin">
+
+    <!-- ================= PROPERTIES ================= -->
+    <xacro:property name="table_length" value="2"/>
+    <xacro:property name="table_width" value="1"/>
+    <xacro:property name="table_height" value="1"/>
+    <xacro:property name="table_thickness" value="0.05"/>
+    <xacro:property name="leg_length" value="${table_height - table_thickness}"/>
+    <xacro:property name="leg_radius" value="0.05"/>
+
+    <!-- World to table -->
+    <joint name="${prefix}_to_${parent}" type="fixed">
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent}"/>
+      <child link="${prefix}_top"/>
+    </joint>
+
+    <!-- ================= TABLE TOP ================= -->
+    <!-- Frame at TOP surface -->
+    <link name="${prefix}_top">
+      <visual>
+        <origin xyz="0 0 ${-table_thickness/2}" rpy="0 0 0"/>
+        <geometry>
+          <box size="${table_length} ${table_width} ${table_thickness}"/>
+        </geometry>
+        <material name="brown"/>
+      </visual>
+    </link>
+
+    <!-- Compute leg offsets -->
+    <xacro:property name="leg_x" value="${table_length/2 - leg_radius}"/>
+    <xacro:property name="leg_y" value="${table_width/2 - leg_radius}"/>
+
+    <!-- ================= LEGS ================= -->
+    <xacro:macro name="leg" params="name prefix x y">
+
+      <link name="${name}">
+        <visual>
+          <!-- Frame at TOP of leg -->
+          <origin xyz="0 0 ${-leg_length/2}" rpy="0 0 0"/>
+          <geometry>
+            <cylinder radius="${leg_radius}" length="${leg_length}"/>
+          </geometry>
+          <material name="light_grey"/>
+        </visual>
+      </link>
+
+      <joint name="${prefix}_to_${name}" type="fixed">
+        <origin xyz="${x} ${y} ${-table_thickness}" rpy="0 0 0"/>
+        <parent link="${prefix}_top"/>
+        <child link="${name}"/>
+      </joint>
+
+    </xacro:macro>
+
+    <!-- Instantiate four legs -->
+    <xacro:leg name="${prefix}_leg_fl" prefix="${prefix}" x="${leg_x}"  y="${leg_y}"/>
+    <xacro:leg name="${prefix}_leg_fr" prefix="${prefix}" x="${leg_x}"  y="${-leg_y}"/>
+    <xacro:leg name="${prefix}_leg_bl" prefix="${prefix}" x="${-leg_x}" y="${leg_y}"/>
+    <xacro:leg name="${prefix}_leg_br" prefix="${prefix}" x="${-leg_x}" y="${-leg_y}"/>
+
+  </xacro:macro>
+</robot>
