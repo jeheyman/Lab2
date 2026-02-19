@@ -56,10 +56,10 @@
     </xacro:macro>
 
     <!-- Instantiate four legs -->
-    <xacro:leg name="leg_fl" prefix="${prefix}" x="${leg_x}"  y="${leg_y}"/>
-    <xacro:leg name="leg_fr" prefix="${prefix}" x="${leg_x}"  y="${-leg_y}"/>
-    <xacro:leg name="leg_bl" prefix="${prefix}" x="${-leg_x}" y="${leg_y}"/>
-    <xacro:leg name="leg_br" prefix="${prefix}" x="${-leg_x}" y="${-leg_y}"/>
+    <xacro:leg name="${prefix}_leg_fl" prefix="${prefix}" x="${leg_x}"  y="${leg_y}"/>
+    <xacro:leg name="${prefix}_leg_fr" prefix="${prefix}" x="${leg_x}"  y="${-leg_y}"/>
+    <xacro:leg name="${prefix}_leg_bl" prefix="${prefix}" x="${-leg_x}" y="${leg_y}"/>
+    <xacro:leg name="${prefix}_leg_br" prefix="${prefix}" x="${-leg_x}" y="${-leg_y}"/>
 
   </xacro:macro>
 </robot>

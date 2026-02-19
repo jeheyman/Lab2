@@ -15,7 +15,7 @@
         <origin xyz="0 0 0" rpy="0 0 0" />
     </xacro:rrbot>
 
-        <xacro:table prefix="table2" parent="world">
+    <xacro:table prefix="table2" parent="world">
         <origin xyz="0 0 1" rpy="0 0 0" />
     </xacro:table>
 
@@ -23,11 +23,35 @@
         <origin xyz="0 0 0" rpy="0 0 0" />
     </xacro:rrbot>
 
-        <xacro:table prefix="table3" parent="world">
+    <xacro:table prefix="table3" parent="world">
         <origin xyz="3 0 1" rpy="0 0 0" />
     </xacro:table>
 
     <xacro:rrbot prefix="rrbot3_" parent="table3_top">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:rrbot>
+
+    <xacro:table prefix="table4" parent="world">
+        <origin xyz="-3 3 1" rpy="0 0 0" />
+    </xacro:table>
+
+    <xacro:rrbot prefix="rrbot4_" parent="table4_top">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:rrbot>
+
+    <xacro:table prefix="table5" parent="world">
+        <origin xyz="0 3 1" rpy="0 0 0" />
+    </xacro:table>
+
+    <xacro:rrbot prefix="rrbot5_" parent="table5_top">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:rrbot>
+
+        <xacro:table prefix="table6" parent="world">
+        <origin xyz="3 3 1" rpy="0 0 0" />
+    </xacro:table>
+
+    <xacro:rrbot prefix="rrbot6_" parent="table6_top">
         <origin xyz="0 0 0" rpy="0 0 0" />
     </xacro:rrbot>
 
