@@ -34,7 +34,7 @@
     <xacro:property name="leg_y" value="${table_width/2 - leg_radius}"/>
 
     <!-- ================= LEGS ================= -->
-    <xacro:macro name="leg" params="name x y">
+    <xacro:macro name="leg" params="name prefix x y">
 
       <link name="${name}">
         <visual>
@@ -47,19 +47,19 @@
         </visual>
       </link>
 
-      <joint name="table_to_${name}" type="fixed">
+      <joint name="${prefix}_to_${name}" type="fixed">
         <origin xyz="${x} ${y} ${-table_thickness}" rpy="0 0 0"/>
-        <parent link="table_top"/>
+        <parent link="${prefix}_top"/>
         <child link="${name}"/>
       </joint>
 
     </xacro:macro>
 
     <!-- Instantiate four legs -->
-    <xacro:leg name="leg_fl" x="${leg_x}"  y="${leg_y}"/>
-    <xacro:leg name="leg_fr" x="${leg_x}"  y="${-leg_y}"/>
-    <xacro:leg name="leg_bl" x="${-leg_x}" y="${leg_y}"/>
-    <xacro:leg name="leg_br" x="${-leg_x}" y="${-leg_y}"/>
+    <xacro:leg name="leg_fl" prefix="table" x="${leg_x}"  y="${leg_y}"/>
+    <xacro:leg name="leg_fr" prefix="table" x="${leg_x}"  y="${-leg_y}"/>
+    <xacro:leg name="leg_bl" prefix="table" x="${-leg_x}" y="${leg_y}"/>
+    <xacro:leg name="leg_br" prefix="table" x="${-leg_x}" y="${-leg_y}"/>
 
   </xacro:macro>
 </robot>

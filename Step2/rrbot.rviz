@@ -7,9 +7,7 @@ Panels:
         - /Global Options1
         - /Status1
         - /RobotModel1
-        - /RobotModel1/Status1
         - /TF1
-        - /TF1/Status1
         - /TF1/Frames1
       Splitter Ratio: 0.4375
     Tree Height: 457
@@ -141,6 +139,8 @@ Visualization Manager:
           Value: true
         rrbot_base_link:
           Value: true
+        rrbot_link1:
+          Value: true
         rrbot_link2:
           Value: true
         rrbot_tool0:
@@ -156,17 +156,19 @@ Visualization Manager:
       Show Names: false
       Tree:
         world:
-          table_top:
-            leg_bl:
-              {}
-            leg_br:
-              {}
-            leg_fl:
-              {}
-            leg_fr:
-              {}
-            rrbot_base_link:
-              {}
+          rrbot_base_link:
+            rrbot_link1:
+              rrbot_link2:
+                rrbot_tool0:
+                  table_top:
+                    leg_bl:
+                      {}
+                    leg_br:
+                      {}
+                    leg_fl:
+                      {}
+                    leg_fr:
+                      {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -215,7 +217,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 8.024334907531738
+      Distance: 8.961393356323242
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -230,10 +232,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6203979849815369
+      Pitch: 0.2897970974445343
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.1585865020751953
+      Yaw: 4.146761894226074
     Saved: ~
 Window Geometry:
   Displays:
