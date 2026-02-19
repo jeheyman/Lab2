@@ -17,12 +17,6 @@ def generate_launch_description():
             executable='rviz2',
             name='rviz2',
             output='screen',
-<<<<<<< HEAD
-            arguments=['-d', 'rrbot.rviz']
-        )
-    ])
-=======
             arguments=['-d', 'table.rviz']
         )
     ])
->>>>>>> 7da7082 (Built step2 task1)
